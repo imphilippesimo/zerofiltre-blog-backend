@@ -34,6 +34,7 @@ public class EnrollmentController {
     private final Suspend suspend;
     private final CompleteLesson completeLesson;
     private final FindEnrollment findEnrollment;
+    private final SandboxProvider sandboxProvider;
 
     private final GenerateCertificate generateCertificate;
 
@@ -49,11 +50,17 @@ public class EnrollmentController {
             PurchaseProvider purchaseProvider,
             CertificateProvider certificateProvider) {
         this.securityContextManager = securityContextManager;
+        this.sandboxProvider = sandboxProvider;
         enroll = new Enroll(enrollmentProvider, courseProvider, userProvider, chapterProvider, sandboxProvider, purchaseProvider);
         suspend = new Suspend(enrollmentProvider, chapterProvider, purchaseProvider, sandboxProvider);
         completeLesson = new CompleteLesson(enrollmentProvider, lessonProvider, chapterProvider, courseProvider);
         findEnrollment = new FindEnrollment(enrollmentProvider, courseProvider, chapterProvider);
         generateCertificate = new GenerateCertificate(enrollmentProvider, certificateProvider);
+    }
+
+    @PostMapping("/provision")
+    public void provision(@RequestParam String fullName, @RequestParam String email) throws ZerofiltreException {
+        sandboxProvider.initialize(fullName, email);
     }
 
 

@@ -126,6 +126,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/notification/help",
                         "/payment/checkout",
                         "/payment/webhook",
+                        "/enrollment/provision",
                         "/user/github/**").permitAll()
                 .antMatchers(HttpMethod.GET,
                         "/article/**", "/course/**", "/chapter/**", "/section/**", "/checkout", "/lesson/*",

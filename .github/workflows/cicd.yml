@@ -18,6 +18,8 @@ jobs:
       username: ${{ secrets.DOCKER_HUB_USERNAME }}
       password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       namespace: ${{ secrets.K8S_USERNAME }}
+      provisioner_token: ${{secrets.PROVISIONER_TOKEN}}
+      provisioner_url: ${{secrets.PROVISIONER_URL}}
 
     steps:
       - name: Checkout
